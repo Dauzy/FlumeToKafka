@@ -9,6 +9,8 @@ from PyPost import PyPost
 
 
 class ConsumerPost:
+	""" Clase consumidor, desde aqui se lee el topico de kafka
+		y se guarda en postgres """
 
 	def __init__(self, url, topic, urlPost, portPost):
 		self.topic = topic
@@ -19,15 +21,19 @@ class ConsumerPost:
 		self.postsql = PyPost(urlPost, portPost)
 
 	def sendData(self):
+		# inicializacomos el parser
 
 		p = parsedatetime.Calendar()
 		
 		for msg in self.consumer:
-			
+			# decodificamos
 			sppls = str(msg.value.decode('utf8')).split(" ")
 			
+			# Condicion, si inicia con una ip lo manda a la tabla de apache 
+			# caso contrario lo guarda en la tabla de log messages			
 			if sppls[0] == '::1' or re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",sppls[0]):
-				
+				# asignamos valores basandonos en el indice del arreglo 
+
 				chi = sppls[0]
 				space1 = sppls[1]
 				caun = sppls[2]
@@ -39,6 +45,7 @@ class ConsumerPost:
 				cqtx = (str(cqtx_es.join(sppls[5:8])))
 				pssc = sppls[8]
 				pscl = sppls[9]
+				#mandamos los datos a postgres
 				self.postsql.saveDataApache('dummydb','postgres','secretpass', chi, space1, caun, cqtd, cqtx, pssc, pscl)
 			
 			else:
@@ -51,6 +58,7 @@ class ConsumerPost:
 				codeLog = cadena.split(" ")[4]
 				logMessage = cadena.split(" ")[5:]
 				es = " "
+				#mandamos datos a postgres
 				self.postsql.saveData('dummydb','postgres','secretpass', fecha, dirhost, codeLog,str(es.join(logMessage)))
 
 
