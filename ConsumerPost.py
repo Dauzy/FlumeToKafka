@@ -59,8 +59,8 @@ class ConsumerPost:
 				logMessage = cadena.split(" ")[5:]
 				es = " "
 				#mandamos datos a postgres
-				self.postsql.saveData('dummydb','postgres','secretpass', fecha, dirhost, codeLog,str(es.join(logMessage)))
+				self.postsql.saveData('dbname','userpostgres','secretpass', fecha, dirhost, codeLog,str(es.join(logMessage)))
 
 
-consu = ConsumerPost('localhost:9092','syslogs3','localhost','5432')
+consu = ConsumerPost('localhost:9092','topic_name','localhost','5432')
 consu.sendData()
