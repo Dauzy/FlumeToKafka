@@ -25,6 +25,7 @@ class PyPost:
 			cur = conn.cursor()
 			cur.execute(query,data)
 			conn.commit()
+			print(">>>>>>>>>>MESSAGES")
 			print("Data is write!")
 			
 		except BaseException as e: 
@@ -49,6 +50,7 @@ class PyPost:
 			cur = conn.cursor()
 			cur.execute(query,data)
 			conn.commit()
+			print(">>>>>>>APACHE")
 			print("APACHE: Data is write!")
 			
 		except BaseException as e: 

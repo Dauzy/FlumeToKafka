@@ -41,14 +41,14 @@ class ConsumerPost:
 				#print(">>>>>>>>"+fechita)
 				time_struct1, parse_status1 = p.parse(fechita)
 				#print(time_struct1)
-				print(">>>>>"+fechita)
+				#print(">>>>>"+fechita)
 				cqtd = datetime(*time_struct1[:6])
 				cqtx_es = " "
 				cqtx = (str(cqtx_es.join(sppls[5:8])))
 				# print(sppls)
 				pssc = sppls[8]
 				pscl = sppls[9]
-				print(chi +" "+ space1+" "+caun+" "+ str(cqtd)+" >>"+cqtx +" "+pssc+" "+pscl)
+				#print(chi +" "+ space1+" "+caun+" "+ str(cqtd)+" >>"+cqtx +" "+pssc+" "+pscl)
 				self.postsql.saveDataApache('dummydb','postgres','secretpass', chi, space1, caun, cqtd, cqtx, pssc, pscl)
 			else:
 				
